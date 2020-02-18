@@ -1,0 +1,23 @@
+---
+title: "Enrollment"
+author: "Emily Ni"
+date: "2/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(tidyverse)
+library(janitor)
+```
+```{r}
+x <- read_excel("class_enrollment_summary_by_term2.18.20.xlsx", 
+                skip = 3) %>% 
+  clean_names() %>% 
+  filter(!is.na(course_name)) %>% 
+  count(course_department, wt = total) %>% 
+    arrange(desc(n))
+  
+```
+
